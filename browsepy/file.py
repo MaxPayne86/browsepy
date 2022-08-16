@@ -76,6 +76,7 @@ class Node(object):
         "aif", "aifc", "aiff", "flac", "w64", "wav",
     )
     midifile_exts = ("mid", "midi")
+    devicemodel_exts = ("json")
 
     @cached_property
     def is_excluded(self):
@@ -267,6 +268,11 @@ class Node(object):
                 return "SF3 Instrument"
             if extension == "sfz":
                 return "SFZ Instrument"
+
+        # Device Models
+        if parentdir in ("Model SIMs"):
+            if extension in self.devicemodel_exts:
+                return "Device Models"
 
         # If this is reached, a file is placed in a directory not fit for it
         # We can still return a recognizable type, but add "Unlisted" suffix
